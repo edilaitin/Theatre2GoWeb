@@ -1,0 +1,1 @@
+web: gunicorn Theatre2GoWeb.wsgi --log-file -
