@@ -144,6 +144,10 @@ cloudinary.config(
     secure=True
 )
 
+LOCATION_FIELD = {
+    'provider.google.api_key': 'AIzaSyBHfHQEXiF-tgiuRc5NIH_hybFrvfOhrbM'
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 

@@ -7,8 +7,12 @@ from location_field.models.plain import PlainLocationField
 class TheatreType(models.Model):
     type = models.CharField(max_length=255, null=False)
 
+    def __str__(self):
+        return self.type
+
 
 class WorkProgram(models.Model):
+    description = models.CharField(max_length=255, null=False)
     Monday = models.CharField(max_length=255, null=False)
     Tuesday = models.CharField(max_length=255, null=False)
     Wednesday = models.CharField(max_length=255, null=False)
@@ -16,6 +20,9 @@ class WorkProgram(models.Model):
     Friday = models.CharField(max_length=255, null=False)
     Saturday = models.CharField(max_length=255, null=False)
     Sunday = models.CharField(max_length=255, null=False)
+
+    def __str__(self):
+        return self.description
 
 
 class Theatre(models.Model):
@@ -28,3 +35,6 @@ class Theatre(models.Model):
     theatreType = models.ForeignKey(TheatreType, on_delete=models.CASCADE)  # DELETE ALL THEATRES OF THE DELETED TYPE
     playsRating = models.IntegerField(editable=False, default=-1)
     program = models.ForeignKey(WorkProgram, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.name

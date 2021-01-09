@@ -1,3 +1,6 @@
 from django.contrib import admin
+from theatres.models import TheatreType, Theatre, WorkProgram
 
-# Register your models here.
+admin.site.register(TheatreType)
+admin.site.register(WorkProgram)
+admin.site.register(Theatre)
