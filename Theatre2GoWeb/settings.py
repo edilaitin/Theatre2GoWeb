@@ -74,14 +74,10 @@ WSGI_APPLICATION = 'Theatre2GoWeb.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse('postgres://zmgrrpwtmyorbj'
+                                     ':69502668694789861aa068256acd1a33fa497435d7dbc65a50a531d5d3180601@ec2-54-247-94'
+                                     '-127.eu-west-1.compute.amazonaws.com:5432/d4d00dhr0vcveg')
 }
-
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
