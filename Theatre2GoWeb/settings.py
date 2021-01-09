@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+
+import cloudinary
 import django_heroku
 import dj_database_url
 
@@ -43,6 +45,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -106,8 +110,8 @@ AUTH_PASSWORD_VALIDATORS = [
 """ //////////////////  ALL AUTH CONFIG START //////////////////////"""
 
 AUTHENTICATION_BACKENDS = (
- 'django.contrib.auth.backends.ModelBackend',
- 'allauth.account.auth_backends.AuthenticationBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 )
 
 SITE_ID = 1
@@ -126,6 +130,14 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 """ //////////////////  ALL AUTH CONFIG END //////////////////////"""
+
+
+cloudinary.config(
+    cloud_name="hb5kcppo6",
+    api_key="397369374923781",
+    api_secret="HQagthIRQPzBzQpn7t0kUk4bdoQ",
+    secure=True
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
