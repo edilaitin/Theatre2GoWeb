@@ -1,6 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from theatres.models import Theatre
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the theatres index.")
+
+def view_theatres(request):
+    context = {
+        'theatres': Theatre.objects.all()
+    }
+    return render(request, "theatres/index.html", context)
