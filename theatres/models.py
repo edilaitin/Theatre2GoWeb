@@ -11,7 +11,23 @@ class TheatreType(models.Model):
         return self.type
 
 
+class Theatre(models.Model):
+    name = models.CharField(max_length=255, null=False)
+    description = models.TextField()
+    phone = PhoneNumberField(null=False, blank=False)
+    mail = models.EmailField()
+    website = models.CharField(max_length=255, null=True)
+    location = PlainLocationField(based_fields=['city'], zoom=7)
+    image = CloudinaryField('theatreImage')
+    theatreType = models.ForeignKey(TheatreType, on_delete=models.CASCADE)  # DELETE ALL THEATRES OF THE DELETED TYPE
+    playsRating = models.IntegerField(editable=False, default=-1)
+
+    def __str__(self):
+        return self.name
+
+
 class WorkProgram(models.Model):
+    theatre = models.OneToOneField(Theatre, on_delete=models.CASCADE)
     description = models.CharField(max_length=255, null=False)
     Monday = models.CharField(max_length=255, null=False)
     Tuesday = models.CharField(max_length=255, null=False)
@@ -25,16 +41,4 @@ class WorkProgram(models.Model):
         return self.description
 
 
-class Theatre(models.Model):
-    name = models.CharField(max_length=255, null=False)
-    description = models.TextField()
-    phone = PhoneNumberField(null=False, blank=False)
-    mail = models.EmailField()
-    location = PlainLocationField(based_fields=['city'], zoom=7)
-    image = CloudinaryField('theatreImage')
-    theatreType = models.ForeignKey(TheatreType, on_delete=models.CASCADE)  # DELETE ALL THEATRES OF THE DELETED TYPE
-    playsRating = models.IntegerField(editable=False, default=-1)
-    program = models.ForeignKey(WorkProgram, on_delete=models.SET_NULL, null=True)
 
-    def __str__(self):
-        return self.name

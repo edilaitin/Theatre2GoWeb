@@ -33,6 +33,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'artists.apps.ArtistsConfig',
+    'plays.apps.PlaysConfig',
     'theatres.apps.TheatresConfig',
 
     'django.contrib.admin',
