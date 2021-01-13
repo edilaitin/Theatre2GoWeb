@@ -19,6 +19,9 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name="login/index.html")),
+    path('artists/', include('artists.urls')),
+    path('plays/', include('plays.urls')),
+    path('theatres/', include('theatres.urls')),
     path('theatres/', include('theatres.urls')),
     path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),  # Keep as last

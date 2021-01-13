@@ -1,3 +1,13 @@
-from django.shortcuts import render
+from django.views.generic import ListView, DetailView
 
-# Create your views here.
+from plays.models import Play
+
+
+class PlayListView(ListView):
+    model = Play
+    context_object_name = 'plays'
+
+
+class PlayDetailView(DetailView):
+    model = Play
+    context_object_name = 'play'

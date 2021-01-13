@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+    {% for theatre in theatres %}
+        <h1><a href="{% url 'theatre_view' theatre.id %}">{{ theatre.name }} (click me)</a></h1>
+        <p>{{ theatre.description }}</p>
+    {% endfor %}
+{% endblock content %}

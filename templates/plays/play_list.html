@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+    {% for play in plays %}
+        <h1><a href="{% url 'play_view' play.id %}">{{ play.vaultPlay.title }}(click me again)</a></h1>
+        <p>{{ play.vaultPlay.shortBio }}</p>
+        <p>Starting at {{ play.startTime }}</p>
+        <p>Ending at {{ play.endTime }}</p>
+    {% endfor %}
+{% endblock content %}

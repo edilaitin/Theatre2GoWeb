@@ -1,9 +1,6 @@
+{% extends "base.html" %}
 {% load socialaccount %}
-<html>
-  <head>
-    <title>Google Registration</title>
-  </head>
-  <body>
+{% block content %}
   <h1>My Google Login Project</h1>
   {% if user.is_authenticated %}
   <p>Welcome, {{ user.username }} !</p>
@@ -12,6 +9,4 @@
   <h1>My Google Login Project</h1>
   <a href="{% provider_login_url 'google' %}">Login with Google</a>
   {% endif %}
-
-  </body>
-</html>
+{% endblock content %}

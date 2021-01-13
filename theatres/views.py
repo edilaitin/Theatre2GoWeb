@@ -1,11 +1,14 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.views.generic import ListView, DetailView
 
 from theatres.models import Theatre
 
 
-def view_theatres(request):
-    context = {
-        'theatres': Theatre.objects.all()
-    }
-    return render(request, "theatres/index.html", context)
+class TheatreListView(ListView):
+    model = Theatre
+    context_object_name = 'theatres'
+
+
+class TheatreDetailView(DetailView):
+    model = Theatre
+    context_object_name = 'theatre'

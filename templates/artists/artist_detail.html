@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load cloudinary %}
+{% block content %}
+    <h1>SINGLE ARTIST VIEW</h1>
+    <h1>{{ artist.name }}</h1>
+    {% cloudinary artist.image format="jpg" width=120 height=80 crop="fill" %}
+    <p>{{ artist.shortBio }}</p>
+    <br>
+    <h2>Associated with theatres:</h2>
+    {% for theatre in artist.associatedTheatres.all %}
+        <p><a href="{% url 'theatre_view' theatre.id %}">{{ theatre.name }}</a></p>
+    {% endfor %}
+    <br>
+    <h2>Played in:</h2>
+    {% for actor_role in artist.actorrole_set.all %}
+        <p>{{ actor_role.vaultPlay.title }} with the role of {{ actor_role.role }}</p>
+    {% endfor %}
+
+{% endblock content %}
