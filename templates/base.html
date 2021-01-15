@@ -1,14 +1,139 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+
     {% if title %}
-    <title>{{ title }}</title>
+        <title>{{ title }}</title>
     {% else %}
         <title>Theatre2GoWeb</title>
     {% endif %}
-  </head>
-  <body>
-    {% block content %}
-    {% endblock %}
-  </body>
+
+    <!-- Font Awesome -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+            rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+            rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.0.0/mdb.min.css"
+            rel="stylesheet"
+    />
+</head>
+
+<body>
+
+<header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+            <!-- Navbar img -->
+            <a class="navbar-brand" href="#">
+                <img
+                        src="{% static 'images/t2g_logo.png' %}"
+                        height="30"
+                        alt=""
+                        loading="lazy"
+                />
+                Theatre2Go
+            </a>
+
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <!-- Plays -->
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'plays_view' %}">Plays</a>
+                    </li>
+
+                    <!-- Dropdown Theatres -->
+                    <li class="nav-item dropdown">
+                        <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                id="navbarDropdown"
+                                role="button"
+                                data-mdb-toggle="dropdown"
+                                aria-expanded="false"
+                        >
+                            Theatres
+                        </a>
+                        <!-- Dropdown Theatres menu -->
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {#                            TODO: sa vedem cum facem sa filtreze#}
+                            <li><a class="dropdown-item" href="{% url 'theatres_view' %}">State</a></li>
+                            <li><a class="dropdown-item" href="{% url 'theatres_view' %}">Independent</a></li>
+                            <li>
+                                <hr class="dropdown-divider"/>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'theatres_view' %}">All</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Dropdown Artists -->
+                    <li class="nav-item dropdown">
+                        <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                id="navbarDropdown"
+                                role="button"
+                                data-mdb-toggle="dropdown"
+                                aria-expanded="false"
+                        >
+                            Artists
+                        </a>
+                        <!-- Dropdown Artists menu -->
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'artists_view' %}">Actors</a></li>
+                            <li><a class="dropdown-item" href="{% url 'artists_view' %}">Directors</a></li>
+                            <li>
+                                <hr class="dropdown-divider"/>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'artists_view' %}">All</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- Left links -->
+
+            </div>
+            <!-- Collapsible wrapper -->
+        </div>
+        <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+
+</header>
+
+<main>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+</main>
+
+<footer>
+
+</footer>
+
+<!-- MDB -->
+<script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.0.0/mdb.min.js"
+></script>
+
+</body>
+
+
 </html>
