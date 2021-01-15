@@ -1,4 +1,5 @@
 {% load static %}
+{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -106,6 +107,25 @@
                     </li>
                 </ul>
                 <!-- Left links -->
+
+                {% if user.is_authenticated %}
+                    <button
+                            class="btn"
+                            type="button"
+                            data-mdb-ripple-color="dark"
+{#                            TODO: log out?#}
+                            onclick="location.href='{% provider_login_url 'google' %}'"
+                    >Sign Out
+                    </button>
+                {% else %}
+                    <button
+                            class="btn"
+                            type="button"
+                            data-mdb-ripple-color="dark"
+                            onclick="location.href='{% provider_login_url 'google' %}'"
+                    >Sign In
+                    </button>
+                {% endif %}
 
             </div>
             <!-- Collapsible wrapper -->
