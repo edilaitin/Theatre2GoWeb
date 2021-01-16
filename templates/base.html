@@ -107,14 +107,6 @@
                             </li>
                         </ul>
                     </li>
-
-                    <!-- Vault Plays -->
-                    {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            {#                        TODO: vault plays view?#}
-                            <a class="nav-link" aria-current="page" href="{% url 'plays_view' %}">Vault Plays</a>
-                        </li>
-                    {% endif %}
                 </ul>
                 <!-- Left links -->
 
@@ -131,21 +123,20 @@
                                     aria-expanded="false"
                             >
                                 <img
-                                        {#                                        TODO: user picture#}
-                                        src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
+                                        src="{{ user.socialaccount_set.all.0.get_avatar_url }}"
                                         class="rounded-circle"
                                         height="22"
                                         alt=""
                                         loading="lazy"
                                 />
                             </a>
+                            {#                            TODO: hrefs update#}
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                {#                                TODO: link?#}
                                 <li><a class="dropdown-item" href="#">My profile</a></li>
+                                <li><a class="dropdown-item" href="#">Vault Plays</a></li>
                                 <li>
                                     <hr class="dropdown-divider"/>
                                 </li>
-                                {#                                TODO: logout#}
                                 <li><a class="dropdown-item" href="#">Logout</a></li>
                             </ul>
                         </li>
@@ -174,8 +165,8 @@
     {% endblock %}
 </main>
 
-<footer>
-    <div class="text-center py-3" style="background-color: rgba(0, 0, 0, 0.2)">
+<footer class="mt-2">
+    <div class="text-center py-3 mx-0" style="background-color: rgba(0, 0, 0, 0.2)">
         © 2021 Theatre2GoWeb
     </div>
 </footer>
