@@ -10,6 +10,7 @@ class VaultPlay(models.Model):
     shortBio = models.TextField()
     theatre = models.ForeignKey(Theatre, on_delete=models.CASCADE)
     director = models.ForeignKey(Artist, on_delete=models.SET_NULL, related_name="director", null=True)
+    # writer = models.TextField()
     image = CloudinaryField('playImage')
     carouselImage1 = CloudinaryField('carouselImage1', blank=True, null=True)
     carouselImage2 = CloudinaryField('carouselImage2', blank=True, null=True)

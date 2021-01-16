@@ -1,9 +1,27 @@
 {% extends "base.html" %}
+{% load cloudinary %}
 {% block content %}
     {% for play in plays %}
-        <h1><a href="{% url 'play_view' play.id %}">{{ play.vaultPlay.title }}(click me again)</a></h1>
-        <p>{{ play.vaultPlay.shortBio }}</p>
-        <p>Starting at {{ play.startTime }}</p>
-        <p>Ending at {{ play.endTime }}</p>
+        <div class="row justify-content-between">
+            <div class="col-9">
+                <div class="row">
+                    <div class="col-auto">
+                        <h1><a class="link-dark" href="{% url 'play_view' play.id %}"><u>{{ play.vaultPlay.title }}</u></a>
+                        </h1>
+                        {#                        TODO: de pus autorul#}
+                        {#                        <h4>by {{play.vaultPlay.director}}</h4>#}
+                        <h4>by Writer Placeholder</h4>
+                    </div>
+                </div>
+                <p><i class="fas fa-map-marker-alt"></i> {{ play.vaultPlay.theatre }}</p>
+                <p><i class="far fa-calendar-alt"></i> {{ play.startTime.date }}, {{ play.startTime|date:"l" }}</p>
+                <p><i class="far fa-clock"></i> {{ play.startTime.time }}-{{ play.endTime.time }}</p>
+            </div>
+            <div class="col-3">
+{#                TODO: width and height automatic cu parent#}
+                {% cloudinary play.vaultPlay.image format="jpg" width="270" height="200" crop="fill" %}
+            </div>
+            <hr>
+        </div>
     {% endfor %}
 {% endblock content %}
