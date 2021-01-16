@@ -1,17 +1,41 @@
 {% extends "base.html" %}
 {% load cloudinary %}
 {% block content %}
-    <h1>SINGLE PLAY VIEW</h1>
-    {% cloudinary play.vaultPlay.image format="jpg" width=120 height=80 crop="fill" %}
-    <h1>{{ play.vaultPlay.title }}</h1>
-    <p>{{ play.vaultPlay.shortBio }}</p>
-    <p>Starting at {{ play.startTime }}</p>
-    <p>Ending at {{ play.endTime }}</p>
-    <br>
-    <p><a href="{% url 'theatre_view' play.vaultPlay.theatre.id %}">Played at the theatre: {{ play.vaultPlay.theatre.name }}</a></p>
-    <p><a href="{% url 'artist_view' play.vaultPlay.director.id %}">Directed by {{ play.vaultPlay.director.name }}</a></p>
-    <p>With the following actors: </p>
-    {% for actor_role in play.vaultPlay.actorrole_set.all %}
-        <p>{{ actor_role.artist.name }} in the role of {{ actor_role.role }}</p>
-    {% endfor %}
+    {#    TODO: de vazut cum scap de spatiul in plus#}
+    <div>
+        {#    TODO: style the img#}
+        <img src="{{ play.vaultPlay.image.url }}" alt="play photo" class="img-fluid"/>
+        <div class="row p-2 d-flex align-items-center justify-content-start"
+             style="background-color: rgba(0, 0, 0, 0.2)">
+            <div class="col-auto">
+                <p class="h1">{{ play.vaultPlay.title }}</p>
+            </div>
+            <div class="col-auto">
+                <p class="h4">by Writer Placeholder</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="mx-5 mt-3">
+        <div class="row">
+            <p class="h5">Directed by: <a class="link-dark"
+                                          href="{% url 'artist_view' play.vaultPlay.director.id %}">
+                <u>{{ play.vaultPlay.director.name }}</u></a></p>
+            <p><i class="fas fa-map-marker-alt"></i>
+                <a class="link-dark"
+                   href="{% url 'theatre_view' play.vaultPlay.theatre.id %}">
+                    <u>{{ play.vaultPlay.theatre.name }}</u></a></p>
+            <p><i class="far fa-calendar-alt"></i> {{ play.startTime.date }}, {{ play.startTime|date:"l" }}</p>
+            <p><i class="far fa-clock"></i> {{ play.startTime.time }}-{{ play.endTime.time }}</p>
+        </div>
+        <div class="row">
+            <p>{{ play.vaultPlay.shortBio }}</p>
+        </div>
+        <div class="row">
+            <p>With the following actors: </p>
+            {% for actor_role in play.vaultPlay.actorrole_set.all %}
+                <p>{{ actor_role.artist.name }} in the role of {{ actor_role.role }}</p>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock content %}

@@ -34,7 +34,7 @@
 
 <header>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <!-- Container wrapper -->
         <div class="container-fluid">
             <!-- Navbar img -->
@@ -119,14 +119,37 @@
                 <!-- Left links -->
 
                 {% if user.is_authenticated %}
-                    <button
-                            class="btn"
-                            type="button"
-                            data-mdb-ripple-color="dark"
-                            {#                            TODO: log out?#}
-                            onclick="location.href='{% provider_login_url 'google' %}'"
-                    >Sign Out
-                    </button>
+                    <ul class="navbar-nav">
+                        <!-- Avatar -->
+                        <li class="nav-item dropstart">
+                            <a
+                                    class="nav-link dropdown-toggle d-flex align-items-center"
+                                    href="#"
+                                    id="navbarDropdownMenuLink"
+                                    role="button"
+                                    data-mdb-toggle="dropdown"
+                                    aria-expanded="false"
+                            >
+                                <img
+                                        {#                                        TODO: user picture#}
+                                        src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
+                                        class="rounded-circle"
+                                        height="22"
+                                        alt=""
+                                        loading="lazy"
+                                />
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                {#                                TODO: link?#}
+                                <li><a class="dropdown-item" href="#">My profile</a></li>
+                                <li>
+                                    <hr class="dropdown-divider"/>
+                                </li>
+                                {#                                TODO: logout#}
+                                <li><a class="dropdown-item" href="#">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 {% else %}
                     <button
                             class="btn"
@@ -145,16 +168,14 @@
     <!-- Navbar -->
 
 </header>
-
-<main>
-    <div class="container mt-3">
-        {% block content %}
-        {% endblock %}
-    </div>
+{#keep padding at 70px, otherwise the fixed-top navbar overlaps the site content#}
+<main style="padding-top: 70px">
+    {% block content %}
+    {% endblock %}
 </main>
 
 <footer>
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+    <div class="text-center py-3" style="background-color: rgba(0, 0, 0, 0.2)">
         © 2021 Theatre2GoWeb
     </div>
 </footer>
