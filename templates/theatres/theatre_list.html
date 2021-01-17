@@ -1,7 +1,30 @@
 {% extends "base.html" %}
+{#TODO: la titlu sa scrie all/state/independent?#}
+{% block title %}Theatres{% endblock %}
 {% block content %}
-    {% for theatre in theatres %}
-        <h1><a href="{% url 'theatre_view' theatre.id %}">{{ theatre.name }} (click me)</a></h1>
-        <p>{{ theatre.description }}</p>
-    {% endfor %}
+    <div class="container mx-5 mt-3">
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            {% for theatre in theatres %}
+                <div class="col">
+                    <div class="card">
+                        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                            <img
+                                    src="{{ theatre.image.url }}"
+                                    class="img-fluid"
+                            />
+                            <a href="{% url 'theatre_view' theatre.id %}">
+                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ theatre.name }}</h5>
+                            <p class="card-text">
+                                {{ theatre.description }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock content %}
