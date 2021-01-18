@@ -10,6 +10,14 @@
 {% endblock %}
 {% block content %}
     <div class="container">
+        <form class="input-group rounded mb-3" action="{% url 'artists_view' %}" method="get">
+             <input name="type" type="hidden" value="{{ type }}">
+             <input name="q" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+             <span class="input-group-text border-0" id="search-addon">
+                <i class="fas fa-search"></i>
+             </span>
+        </form>
+        {% if query %} Search results for: {{ query }} {% endif %}
         <div class="row row-cols-1 row-cols-md-4 g-4">
             {% for artist in artists %}
                 <div class="col">

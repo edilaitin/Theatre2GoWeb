@@ -10,6 +10,14 @@
 {% endblock %}
 {% block content %}
     <div class="container-fluid">
+        <form class="input-group rounded mb-3" action="{% url 'theatres_view' %}" method="get">
+             <input name="type" type="hidden" value="{{ type }}">
+             <input name="q" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+             <span class="input-group-text border-0" id="search-addon">
+                <i class="fas fa-search"></i>
+             </span>
+        </form>
+        {% if query %} Search results for: {{ query }} {% endif %}
         {% for theatre in theatres %}
             <div class="card mb-3 shadow-lg">
                 <div class="row g-0">
