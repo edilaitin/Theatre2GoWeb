@@ -3,10 +3,10 @@
 {% block title %}Theatres{% endblock %}
 {% block content %}
     <div class="container mx-5 mt-3">
-        <div class="row row-cols-1 row-cols-md-4 g-4">
-            {% for theatre in theatres %}
-                <div class="col">
-                    <div class="card">
+        {% for theatre in theatres %}
+            <div class="card mb-3 shadow-lg">
+                <div class="row g-0">
+                    <div class="col-md-4">
                         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                             <img
                                     src="{{ theatre.image.url }}"
@@ -16,6 +16,8 @@
                                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
                             </a>
                         </div>
+                    </div>
+                    <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title">{{ theatre.name }}</h5>
                             <p class="card-text">
@@ -24,7 +26,7 @@
                         </div>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
+            </div>
+        {% endfor %}
     </div>
 {% endblock content %}

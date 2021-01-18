@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% load cloudinary %}
 {% block content %}
-    <h1>SINGLE THEATRE VIEW</h1>
     {% cloudinary theatre.image format="jpg" width=240 height=160 crop="fill" %}
     <h1>{{ theatre.name }}</h1>
     <p>{{ theatre.description }}</p>
