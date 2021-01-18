@@ -75,9 +75,8 @@
                         </a>
                         <!-- Dropdown Theatres menu -->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            {#                            TODO: sa vedem cum facem sa filtreze#}
-                            <li><a class="dropdown-item" href="{% url 'theatres_view' %}">State</a></li>
-                            <li><a class="dropdown-item" href="{% url 'theatres_view' %}">Independent</a></li>
+                            <li><a class="dropdown-item" href="{% url 'theatres_view' %}?type=state">State</a></li>
+                            <li><a class="dropdown-item" href="{% url 'theatres_view' %}?type=independent">Independent</a></li>
                             <li>
                                 <hr class="dropdown-divider"/>
                             </li>
@@ -101,8 +100,8 @@
                         </a>
                         <!-- Dropdown Artists menu -->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{% url 'artists_view' %}">Actors</a></li>
-                            <li><a class="dropdown-item" href="{% url 'artists_view' %}">Directors</a></li>
+                            <li><a class="dropdown-item" href="{% url 'artists_view' %}?type=actor">Actors</a></li>
+                            <li><a class="dropdown-item" href="{% url 'artists_view' %}?type=director">Directors</a></li>
                             <li>
                                 <hr class="dropdown-divider"/>
                             </li>

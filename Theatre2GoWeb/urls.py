@@ -23,7 +23,6 @@ urlpatterns = [
     path('artists/', include('artists.urls')),
     path('plays/', include('plays.urls')),
     path('theatres/', include('theatres.urls')),
-    path('theatres/', include('theatres.urls')),
     path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),  # Keep as last
 ]
