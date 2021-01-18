@@ -1,5 +1,30 @@
 {% extends "base.html" %}
 {% load cloudinary %}
+{% block title %}{{ theatre.name }}{% endblock %}
+
+{% block footer_scripts %}
+    <script defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHfHQEXiF-tgiuRc5NIH_hybFrvfOhrbM&callback=initMap&libraries=&v=weekly"
+    ></script>
+
+    <script>
+        // Initialize and add the map
+        function initMap() {
+            // The location of Uluru
+            const uluru = {lat: -25.344, lng: 131.036};
+            // The map, centered at Uluru
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 4,
+                center: uluru,
+            });
+            // The marker, positioned at Uluru
+            const marker = new google.maps.Marker({
+                position: uluru,
+                map: map,
+            });
+        }
+    </script>
+{% endblock %}
 {% block content %}
     {% cloudinary theatre.image format="jpg" width=240 height=160 crop="fill" %}
     <h1>{{ theatre.name }}</h1>
@@ -7,10 +32,14 @@
     <br>
     <p>With the following plays:</p>
     <br>
+    <h3>My Google Maps Demo</h3>
+    <div style="height: 400px; width: 100%"></div>
     {% for vault_play in theatre.vaultplay_set.all %}
         <p>{{ vault_play.title }} having the following representations:</p>
         {% for play in vault_play.play_set.all %}
-            <p><a href="{% url 'play_view' play.id %}">From {{ play.startTime }} to {{ play.endTime }} (need to format dates better here)</a></p>
+            <p><a href="{% url 'play_view' play.id %}">From {{ play.startTime }} to {{ play.endTime }} (need to format
+                dates better here)</a></p>
         {% endfor %}
     {% endfor %}
+
 {% endblock content %}

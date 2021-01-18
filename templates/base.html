@@ -76,7 +76,8 @@
                         <!-- Dropdown Theatres menu -->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{% url 'theatres_view' %}?type=state">State</a></li>
-                            <li><a class="dropdown-item" href="{% url 'theatres_view' %}?type=independent">Independent</a></li>
+                            <li><a class="dropdown-item"
+                                   href="{% url 'theatres_view' %}?type=independent">Independent</a></li>
                             <li>
                                 <hr class="dropdown-divider"/>
                             </li>
@@ -101,7 +102,8 @@
                         <!-- Dropdown Artists menu -->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{% url 'artists_view' %}?type=actor">Actors</a></li>
-                            <li><a class="dropdown-item" href="{% url 'artists_view' %}?type=director">Directors</a></li>
+                            <li><a class="dropdown-item" href="{% url 'artists_view' %}?type=director">Directors</a>
+                            </li>
                             <li>
                                 <hr class="dropdown-divider"/>
                             </li>
@@ -164,8 +166,10 @@
 </header>
 {#keep padding at 70px, otherwise the fixed-top navbar overlaps the site content#}
 <main style="padding-top: 70px">
-    {% block content %}
-    {% endblock %}
+    <div class="container mx-5">
+        {% block content %}
+        {% endblock %}
+    </div>
 </main>
 
 <footer class="mt-2">
