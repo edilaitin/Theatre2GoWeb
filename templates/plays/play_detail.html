@@ -14,7 +14,7 @@
 
         <div class="mx-5 mt-3">
             <div class="row">
-                <p class="h5">Written by: Writer Placeholder</p>
+                <p class="h5">Written by: {{ play.vaultPlay.writer }}</p>
                 <p class="h5">Directed by: <a class="link-dark"
                                               href="{% url 'artist_view' play.vaultPlay.director.id %}">
                     <u>{{ play.vaultPlay.director.name }}</u></a></p>
