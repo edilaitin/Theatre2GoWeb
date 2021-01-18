@@ -18,6 +18,13 @@ class ArtistListView(ListView):
                     queryset = queryset.filter(director__isnull=False).distinct()
             return queryset
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        artist_type = self.request.GET.get('type', None)
+        if artist_type is not None:
+            context['type'] = artist_type
+        return context
+
 
 class ArtistDetailView(DetailView):
     model = Artist

@@ -1,6 +1,13 @@
 {% extends "base.html" %}
-{#TODO: Actors/Directors/Artists in functie de type cumva#}
-{% block title %}Artists{% endblock %}
+{% block title %}
+    {% if type == "director" %}
+        Directors
+    {% elif type == "actor" %}
+        Actors
+    {% else %}
+        Artists
+    {% endif %}
+{% endblock %}
 {% block content %}
     <div class="container">
         <div class="row row-cols-1 row-cols-md-4 g-4">

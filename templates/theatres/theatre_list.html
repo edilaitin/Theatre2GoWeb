@@ -1,6 +1,13 @@
 {% extends "base.html" %}
-{#TODO: all/state/independent in functie de type#}
-{% block title %}Theatres{% endblock %}
+{% block title %}
+    {% if type == "state" %}
+        State Theatres
+    {% elif type == "independent" %}
+        Independent Theatres
+    {% else %}
+        Theatres
+    {% endif %}
+{% endblock %}
 {% block content %}
     <div class="container-fluid">
         {% for theatre in theatres %}
