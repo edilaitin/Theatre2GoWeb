@@ -18,6 +18,8 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
+from Theatre2GoWeb import view
+
 urlpatterns = [
     path('', TemplateView.as_view(template_name="login/index.html")),
     path('artists/', include('artists.urls')),
@@ -25,7 +27,8 @@ urlpatterns = [
     path('theatres/', include('theatres.urls')),
     path('accounts/', include('allauth.urls')),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
-
+    path('follow/', view.follow, name='follow'),
+    path('unfollow/', view.unfollow, name='unfollow'),
     path('admin/', admin.site.urls),  # Keep as last
 ]
 

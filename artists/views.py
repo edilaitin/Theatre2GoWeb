@@ -2,7 +2,7 @@ from django.contrib.postgres.aggregates import StringAgg
 from django.contrib.postgres.search import SearchQuery, SearchVector, SearchRank
 from django.views.generic import ListView, DetailView
 
-from artists.models import Artist
+from artists.models import Artist, UserFollow
 
 
 class ArtistListView(ListView):
@@ -47,3 +47,15 @@ class ArtistListView(ListView):
 class ArtistDetailView(DetailView):
     model = Artist
     context_object_name = 'artist'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        if self.request.user.is_authenticated:
+            try:
+                context['follows'] = UserFollow.objects.get(user=self.request.user).artists.filter(pk=self.get_object().id).exists()
+            except UserFollow.DoesNotExist:
+                context['follows'] = False
+
+        return context
+

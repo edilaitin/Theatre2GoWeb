@@ -1,6 +1,7 @@
 from django.contrib.postgres.search import SearchQuery, SearchVector, SearchRank
 from django.views.generic import ListView, DetailView
 
+from artists.models import UserFollow
 from theatres.models import Theatre
 
 
@@ -42,3 +43,15 @@ class TheatreListView(ListView):
 class TheatreDetailView(DetailView):
     model = Theatre
     context_object_name = 'theatre'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        if self.request.user.is_authenticated:
+            try:
+                context['follows'] = UserFollow.objects.get(user=self.request.user).theatres.filter(pk=self.get_object().id).exists()
+            except UserFollow.DoesNotExist:
+                context['follows'] = False
+
+        return context
+

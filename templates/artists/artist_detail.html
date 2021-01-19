@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% load cloudinary %}
 {% block content %}
-    <h1>SINGLE ARTIST VIEW</h1>
     <h1>{{ artist.name }}</h1>
     {% cloudinary artist.image format="jpg" width=120 height=80 crop="fill" %}
+    {% include 'follow.html' with name="artist" id=artist.id %}
     <p>{{ artist.shortBio }}</p>
     <br>
     <h2>Associated with theatres:</h2>
