@@ -24,6 +24,8 @@ urlpatterns = [
     path('plays/', include('plays.urls')),
     path('theatres/', include('theatres.urls')),
     path('accounts/', include('allauth.urls')),
+    path('ratings/', include('star_ratings.urls', namespace='ratings')),
+
     path('admin/', admin.site.urls),  # Keep as last
 ]
 

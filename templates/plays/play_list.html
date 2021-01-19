@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load ratings %}
 {% load cloudinary %}
 {% block title %}Plays{% endblock %}
 {% block content %}
@@ -18,6 +19,7 @@
                             <h1><a class="link-dark"
                                    href="{% url 'play_view' play.id %}"><u>{{ play.vaultPlay.title }}</u></a>
                             </h1>
+                            {% ratings play.vaultPlay read_only=True icon_height=20 icon_width=20 %}
                             <h4>by {{play.vaultPlay.writer}}</h4>
                         </div>
                     </div>

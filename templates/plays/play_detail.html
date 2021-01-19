@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load ratings %}
 {% block title %}{{ play.vaultPlay.title }}{% endblock %}
 {% block content %}
     <div>
@@ -14,6 +15,7 @@
 
         <div class="mx-5 mt-3">
             <div class="row">
+                {% ratings play.vaultPlay %}
                 <p class="h5">Written by: {{ play.vaultPlay.writer }}</p>
                 <p class="h5">Directed by: <a class="link-dark"
                                               href="{% url 'artist_view' play.vaultPlay.director.id %}">
