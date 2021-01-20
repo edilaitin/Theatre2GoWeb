@@ -25,7 +25,7 @@ def add_friend(request):
 
 def friend_requests(request):
     context = {
-        "friend_requests": Friend.objects.unread_requests(user=request.user)
+        "friend_requests": Friend.objects.unrejected_requests(user=request.user)
     }
     return render(request, "users/friend_requests.html", context)
 
