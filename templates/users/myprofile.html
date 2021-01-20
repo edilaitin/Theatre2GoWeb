@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}My profile{% endblock %}
+{% block content %}
+    {# TODO:EDI paginate friends or show more #}
+
+    <h2>Friends:</h2>
+    {% for user in friends %}
+        {% if user.last_name %}
+            <img
+                src="{{ user.socialaccount_set.all.0.get_avatar_url }}"
+                class="rounded-circle"
+                height="90"
+                alt=""
+                loading="lazy"
+            />
+            <br>
+            <p>{{ user.first_name }}  {{ user.last_name }}</p>
+            <br>
+        {% endif %}
+    {% endfor %}
+
+    {# TODO:EDI paginate and/or search for user name/email #}
+    <h2>Other users:</h2>
+    {% for user in users %}
+        {% if user.last_name %}
+            <img
+                src="{{ user.socialaccount_set.all.0.get_avatar_url }}"
+                class="rounded-circle"
+                height="90"
+                alt=""
+                loading="lazy"
+            />
+            <br>
+            <p>{{ user.first_name }}  {{ user.last_name }}</p>
+            <form action={% url 'add_friend' %} method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="user_id" value="{{ user.id }}">
+              <input type="submit" value="Add friend" class="btn btn-primary">
+            </form>
+            <br>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

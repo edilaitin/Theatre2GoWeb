@@ -25,11 +25,17 @@ urlpatterns = [
     path('artists/', include('artists.urls')),
     path('plays/', include('plays.urls')),
     path('theatres/', include('theatres.urls')),
+    path('users/', include('users.urls')),
+
     path('accounts/', include('allauth.urls')),
+
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
+    path('friendship/', include('friendship.urls')),
+
     path('follow/', view.follow, name='follow'),
     path('unfollow/', view.unfollow, name='unfollow'),
-    path('admin/', admin.site.urls),  # Keep as last
+
+    path('admin/', admin.site.urls),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

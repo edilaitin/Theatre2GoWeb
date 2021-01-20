@@ -1,8 +1,17 @@
 from cloudinary.models import CloudinaryField
 from django.db import models
+from django.db.models.signals import post_save
+from star_ratings.models import UserRating
 
 from artists.models import Artist
 from theatres.models import Theatre
+
+
+def on_rating_save(sender, instance, **kwargs):
+    print("AAAAAAAAAAAAAAAAAA")
+
+
+post_save.connect(on_rating_save, sender=UserRating)
 
 
 class VaultPlay(models.Model):

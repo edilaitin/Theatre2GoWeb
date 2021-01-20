@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'artists.apps.ArtistsConfig',
     'plays.apps.PlaysConfig',
     'theatres.apps.TheatresConfig',
+    'users.apps.UsersConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -55,7 +56,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     'cloudinary',
-    'star_ratings'
+    'star_ratings',
+    'friendship'
 ]
 
 MIDDLEWARE = [
