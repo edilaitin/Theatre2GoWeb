@@ -3,17 +3,15 @@
         <form action="/follow/" method="post">
           {% csrf_token %}
           <input type="hidden" name="{{ name }}" value="{{ id }}"}>
-          <input type="submit" value="Follow" class="btn btn-outline-light">
+          <input type="submit" value="Follow" class="btn btn-outline-dark">
         </form>
     {% else %}
-{#        <h2>Already following</h2>#}
         <form action="/unfollow/" method="post">
           {% csrf_token %}
           <input type="hidden" name="{{ name }}" value="{{ id }}"}>
-          <input type="submit" value="Unfollow" class="btn btn-outline-light">
+          <input type="submit" value="Unfollow" class="btn btn-outline-dark">
         </form>
     {% endif %}
 {% else %}
-    <p class="btn btn-outline-light">Login in to follow</p>
+    <p class="btn btn-outline-dark">Login in to follow</p>
 {% endif %}
-{#<br><br>#}

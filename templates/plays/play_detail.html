@@ -9,102 +9,112 @@
 
             <div class="container"
                  style="background-color: rgba(0, 0, 0, 0.2)">
-                <div class="row px-2 pt-2">
+                <div class="row p-2 justify-content-between">
                     <div class="col-auto">
-                        <p class="h1" style="max-width: max-content">{{ play.vaultPlay.title }}</p>
+                        <div class="row">
+                            <div class="col-auto">
+                                <p class="h1" style="max-width: max-content">{{ play.vaultPlay.title }}</p>
+                            </div>
+                            <div class="col-auto pt-2">
+                                {% include 'follow.html' with name="play" id=play.vaultPlay.id %}
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-auto pt-2">
-                        {% include 'follow.html' with name="play" id=play.vaultPlay.id %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="mx-5 mt-3">
-        <div class="row">
-            {% ratings play.vaultPlay %}
-            <p class="h5">Written by: {{ play.vaultPlay.writer }}</p>
-            <p class="h5">Directed by: <a class="link-dark"
-                                          href="{% url 'artist_view' play.vaultPlay.director.id %}">
-                <u>{{ play.vaultPlay.director.name }}</u></a></p>
-            <p><i class="fas fa-map-marker-alt"></i>
-                <a class="link-dark"
-                   href="{% url 'theatre_view' play.vaultPlay.theatre.id %}">
-                    <u>{{ play.vaultPlay.theatre.name }}</u></a></p>
-            <p><i class="far fa-calendar-alt"></i> {{ play.startTime.date }}, {{ play.startTime|date:"l" }}</p>
-            <p><i class="far fa-clock"></i> {{ play.startTime.time }}-{{ play.endTime.time }}</p>
-        </div>
-        <div class="lead">
-            <p>{{ play.vaultPlay.shortBio }}</p>
-        </div>
-        <div class="mb-3">
-            <p class="h3">Cast: </p>
-            <div class="container-fluid">
-                {% for actor_role in play.vaultPlay.actorrole_set.all %}
-                    <div class="row">
-                        <a class="link-dark"
-                           href="{% url 'artist_view' actor_role.artist.id %}"><u>{{ actor_role.artist.name }}</u></a>
-                        <div>{{ actor_role.role }}</div>
+                    <div class="col-auto">
+                        {% ratings play.vaultPlay %}
                     </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    <div>
-        <div id="carouselExampleIndicators" class="carousel slide mx-5" data-mdb-ride="carousel">
-            <ol class="carousel-indicators">
-                <li
-                        data-mdb-target="#carouselExampleIndicators"
-                        data-mdb-slide-to="0"
-                        class="active"
-                ></li>
-                <li data-mdb-target="#carouselExampleIndicators" data-mdb-slide-to="1"></li>
-                <li data-mdb-target="#carouselExampleIndicators" data-mdb-slide-to="2"></li>
-            </ol>
-            {#                    TODO: crop the images -> cloudinary?#}
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img
-                            src="{{ play.vaultPlay.carouselImage1.url }}"
-                            class="d-block w-100"
-                            alt="..."
-                    />
-                </div>
-                <div class="carousel-item">
-                    <img
-                            src="{{ play.vaultPlay.carouselImage2.url }}"
-                            class="d-block w-100"
-                            alt="..."
-                    />
-                </div>
-                <div class="carousel-item">
-                    <img
-                            src="{{ play.vaultPlay.carouselImage3.url }}"
-                            class="d-block w-100"
-                            alt="..."
-                    />
                 </div>
             </div>
-            <a
-                    class="carousel-control-prev"
-                    href="#carouselExampleIndicators"
-                    role="button"
-                    data-mdb-slide="prev"
-            >
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </a>
-            <a
-                    class="carousel-control-next"
-                    href="#carouselExampleIndicators"
-                    role="button"
-                    data-mdb-slide="next"
-            >
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </a>
         </div>
-    </div>
+
+        <div class="mx-5 mt-3">
+            <div class="row">
+                <p class="h5">Written by: {{ play.vaultPlay.writer }}</p>
+                <p class="h5">Directed by: <a class="link-dark"
+                                              href="{% url 'artist_view' play.vaultPlay.director.id %}">
+                    <u>{{ play.vaultPlay.director.name }}</u></a></p>
+                <p><i class="fas fa-map-marker-alt"></i>
+                    <a class="link-dark"
+                       href="{% url 'theatre_view' play.vaultPlay.theatre.id %}">
+                        <u>{{ play.vaultPlay.theatre.name }}</u></a></p>
+                <p><i class="far fa-calendar-alt"></i> {{ play.startTime.date }}, {{ play.startTime|date:"l" }}</p>
+                <p><i class="far fa-clock"></i> {{ play.startTime.time }}-{{ play.endTime.time }}</p>
+            </div>
+
+            <div class="lead">
+                <p>{{ play.vaultPlay.shortBio }}</p>
+            </div>
+
+            <div class="mb-3">
+                <p class="h3">Cast: </p>
+                <div class="container-fluid">
+                    {% for actor_role in play.vaultPlay.actorrole_set.all %}
+                        <div class="row">
+                            <a class="link-dark"
+                               href="{% url 'artist_view' actor_role.artist.id %}"><u>{{ actor_role.artist.name }}</u></a>
+                            <div>{{ actor_role.role }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            <div id="carouselExampleIndicators" class="carousel slide mx-5" data-mdb-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li
+                            data-mdb-target="#carouselExampleIndicators"
+                            data-mdb-slide-to="0"
+                            class="active"
+                    ></li>
+                    <li data-mdb-target="#carouselExampleIndicators" data-mdb-slide-to="1"></li>
+                    <li data-mdb-target="#carouselExampleIndicators" data-mdb-slide-to="2"></li>
+                </ol>
+                {#                    TODO: crop the images -> cloudinary?#}
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img
+                                src="{{ play.vaultPlay.carouselImage1.url }}"
+                                class="d-block w-100"
+                                alt="..."
+                        />
+                    </div>
+                    <div class="carousel-item">
+                        <img
+                                src="{{ play.vaultPlay.carouselImage2.url }}"
+                                class="d-block w-100"
+                                alt="..."
+                        />
+                    </div>
+                    <div class="carousel-item">
+                        <img
+                                src="{{ play.vaultPlay.carouselImage3.url }}"
+                                class="d-block w-100"
+                                alt="..."
+                        />
+                    </div>
+                </div>
+                <a
+                        class="carousel-control-prev"
+                        href="#carouselExampleIndicators"
+                        role="button"
+                        data-mdb-slide="prev"
+                >
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </a>
+                <a
+                        class="carousel-control-next"
+                        href="#carouselExampleIndicators"
+                        role="button"
+                        data-mdb-slide="next"
+                >
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </a>
+            </div>
+        </div>
     </div>
 {% endblock content %}

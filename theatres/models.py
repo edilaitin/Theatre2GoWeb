@@ -18,6 +18,7 @@ class Theatre(models.Model):
     mail = models.EmailField()
     website = models.CharField(max_length=255, null=True)
     location = PlainLocationField(based_fields=['city'], zoom=7)
+    address = models.CharField(max_length=255, null=False, default='Timisoara, Romania')
     image = CloudinaryField('theatreImage')
     theatreType = models.ForeignKey(TheatreType, on_delete=models.CASCADE)  # DELETE ALL THEATRES OF THE DELETED TYPE
     playsRating = models.IntegerField(editable=False, default=-1)
