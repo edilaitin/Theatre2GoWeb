@@ -21,7 +21,6 @@ class Theatre(models.Model):
     address = models.CharField(max_length=255, null=False, default='Timisoara, Romania')
     image = CloudinaryField('theatreImage')
     theatreType = models.ForeignKey(TheatreType, on_delete=models.CASCADE)  # DELETE ALL THEATRES OF THE DELETED TYPE
-    playsRating = models.IntegerField(editable=False, default=-1)
 
     def __str__(self):
         return self.name

@@ -1,5 +1,7 @@
 from django.contrib.postgres.search import SearchQuery, SearchVector, SearchRank
+from django.db.models import Avg
 from django.views.generic import ListView, DetailView
+from star_ratings.models import Rating
 
 from artists.models import UserFollow
 from theatres.models import Theatre
@@ -46,12 +48,23 @@ class TheatreDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        theatre = self.get_object()
 
         if self.request.user.is_authenticated:
             try:
-                context['follows'] = UserFollow.objects.get(user=self.request.user).theatres.filter(pk=self.get_object().id).exists()
+                context['follows'] = UserFollow.objects.get(user=self.request.user).theatres.filter(
+                    pk=theatre.id).exists()
             except UserFollow.DoesNotExist:
                 context['follows'] = False
 
-        return context
+        vault_play_ids = []
 
+        for vault_play in theatre.vaultplay_set.all():
+            vault_play_ids.append(vault_play.id)
+
+        print(vault_play_ids)
+        context['general_rating'] = round(Rating.objects
+                                        .filter(object_id__in=vault_play_ids)
+                                        .aggregate(Avg('average'))['average__avg'], 1)
+
+        return context
