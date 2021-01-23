@@ -42,11 +42,32 @@
                 </div>
             </div>
             <hr>
-            <div class="row">
+            <div>
                 <h4>Played in:</h4>
-                {% for actor_role in artist.actorrole_set.all %}
-                    <p>{{ actor_role.vaultPlay.title }} with the role of {{ actor_role.role }}</p>
-                {% endfor %}
+                <div class="row">
+                    {% for assocTheatre in artist.associatedTheatres.all %}
+                        <div class="col-auto">
+                            <ul class="list-group list-group-flush">
+                                <a href="{% url 'theatre_view' assocTheatre.id %}"
+                                   class="list-group-item list-group-item-action list-group-item-dark"
+                                ><b>{{ assocTheatre.name }}</b></a>
+                            </ul>
+                            <br>
+                            {% for actor_role in artist.actorrole_set.all %}
+                                {% if actor_role.vaultPlay.theatre.name == assocTheatre.name %}
+                                    <li class="list-group-item list-group-item-dark">
+                                        {{ actor_role.vaultPlay.title }}
+                                    </li>
+                                    <li class="list-group-item list-group-item-light">
+                                        {{ actor_role.role }}
+                                    </li>
+                                    <br>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <br>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
