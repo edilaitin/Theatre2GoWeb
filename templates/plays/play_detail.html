@@ -4,9 +4,9 @@
 {% block content %}
     <div>
         <div>
-            {#    TODO: cut and style the img-> cloudinary?#}
-            <img src="{{ play.vaultPlay.image.url }}" alt="play photo" class="img-fluid"/>
-
+            <div class="text-center">
+                <img src="{{ play.vaultPlay.image.url }}" alt="play photo" class="img-fluid"/>
+            </div>
             <div class="container"
                  style="background-color: rgba(0, 0, 0, 0.2)">
                 <div class="row p-2 justify-content-between">
@@ -29,17 +29,25 @@
         </div>
 
         <div class="mx-5 mt-3">
-            <div class="row">
-                <p class="h5">Written by: {{ play.vaultPlay.writer }}</p>
-                <p class="h5">Directed by: <a class="link-dark"
-                                              href="{% url 'artist_view' play.vaultPlay.director.id %}">
-                    <u>{{ play.vaultPlay.director.name }}</u></a></p>
-                <p><i class="fas fa-map-marker-alt"></i>
-                    <a class="link-dark"
-                       href="{% url 'theatre_view' play.vaultPlay.theatre.id %}">
-                        <u>{{ play.vaultPlay.theatre.name }}</u></a></p>
-                <p><i class="far fa-calendar-alt"></i> {{ play.startTime.date }}, {{ play.startTime|date:"l" }}</p>
-                <p><i class="far fa-clock"></i> {{ play.startTime.time }}-{{ play.endTime.time }}</p>
+            <div class="row justify-content-between">
+                <div class="col-auto align-self-center">
+                    <p class="h5">Written by: {{ play.vaultPlay.writer }}</p>
+                    <p class="h5">Directed by: <a class="link-dark"
+                                                  href="{% url 'artist_view' play.vaultPlay.director.id %}">
+                        <u>{{ play.vaultPlay.director.name }}</u></a></p>
+                </div>
+                <div class="col-auto">
+                    <p class="note note-light">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <a class="link-dark"
+                           href="{% url 'theatre_view' play.vaultPlay.theatre.id %}">
+                            <u>{{ play.vaultPlay.theatre.name }}</u></a>
+                        <br>
+                        <i class="far fa-calendar-alt"></i> {{ play.startTime.date }}, {{ play.startTime|date:"l" }}
+                        <br>
+                        <i class="far fa-clock"></i> {{ play.startTime.time }}-{{ play.endTime.time }}
+                    </p>
+                </div>
             </div>
 
             <div class="lead">

@@ -1,19 +1,53 @@
 {% extends "base.html" %}
 {% load cloudinary %}
 {% block content %}
-    <h1>{{ artist.name }}</h1>
-    {% cloudinary artist.image format="jpg" width=120 height=80 crop="fill" %}
-    {% include 'follow.html' with name="artist" id=artist.id %}
-    <p>{{ artist.shortBio }}</p>
-    <br>
-    <h2>Associated with theatres:</h2>
-    {% for theatre in artist.associatedTheatres.all %}
-        <p><a href="{% url 'theatre_view' theatre.id %}">{{ theatre.name }}</a></p>
-    {% endfor %}
-    <br>
-    <h2>Played in:</h2>
-    {% for actor_role in artist.actorrole_set.all %}
-        <p>{{ actor_role.vaultPlay.title }} with the role of {{ actor_role.role }}</p>
-    {% endfor %}
+    <div>
+        <!-- Header with theatre name and follow button -->
+        <div>
+            <div class="text-center">
+                <img src="{{ artist.image.url }}" class="img-fluid" alt="artist photo">
+            </div>
+            <div class="container" style="background-color: rgba(0, 0, 0, 0.2)">
+                <div class="row pt-2">
+                    <div class="col-auto">
+                        <p class="h1">{{ artist.name }}</p>
+                    </div>
+                    <div class="col-auto pt-2">
+                        {% include 'follow.html' with name="artist" id=artist.id %}
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!-- Artist info -->
+        <div class="mx-5 mt-3">
+            <div class="row justify-content-between">
+                <div class="col-auto">
+                    <p class="lead">{{ artist.shortBio }}</p>
+                </div>
+
+                <div class="col-auto">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-dark">
+                            <b>Associated theatres:</b>
+                        </li>
+
+                        {% for theatre in artist.associatedTheatres.all %}
+                            <a href="{% url 'theatre_view' theatre.id %}"
+                               class="list-group-item list-group-item-action list-group-item-light"
+                            >{{ theatre.name }}</a>
+                        {% endfor %}
+
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <h4>Played in:</h4>
+                {% for actor_role in artist.actorrole_set.all %}
+                    <p>{{ actor_role.vaultPlay.title }} with the role of {{ actor_role.role }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock content %}
