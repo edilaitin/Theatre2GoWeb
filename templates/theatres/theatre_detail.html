@@ -122,18 +122,21 @@
     <script>
         // Initialize and add the map
         function initMap() {
-            // The location of Uluru
-            {#TODO put custom location#}
-            const uluru = {lat: -25.344, lng: 131.036};
-            {#const uluru = {lat: {{ theatre.location }}, lng: 131.036};#}
-            // The map, centered at Uluru
+
+            const location = "{{theatre.location}}";
+            const [lat, lng] = location.split(",").map(Number)
+
+            const theatreLocation = {lat: lat, lng: lng};
+
+            // The map, centered at theatre location
             const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 4,
-                center: uluru,
+                zoom: 13,
+                center: theatreLocation,
             });
-            // The marker, positioned at Uluru
+
+            // The marker
             const marker = new google.maps.Marker({
-                position: uluru,
+                position: theatreLocation,
                 map: map,
             });
         }
