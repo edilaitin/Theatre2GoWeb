@@ -33,7 +33,8 @@
         <!-- Container wrapper -->
         <div class="container-fluid">
             <!-- Navbar img -->
-            <a class="navbar-brand">
+{#        TODO: url to home page#}
+            <a class="navbar-brand" href="{% url 'index' %}">
                 <img
                         src="{% static 'images/t2g_logo.png' %}"
                         height="30"
@@ -137,7 +138,6 @@
                                         loading="lazy"
                                 />
                             </a>
-                            {#                            TODO: hrefs update#}
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item" href="{% url 'my_profile' %}">My profile</a></li>
                                 <li><a class="dropdown-item" href="{% url 'friend_requests' %}">Friend requests</a></li>
@@ -150,7 +150,7 @@
                     </ul>
                 {% else %}
                     <button
-                            class="btn"
+                            class="btn btn-light"
                             type="button"
                             data-mdb-ripple-color="dark"
                             onclick="location.href='{% provider_login_url 'google' %}'"

@@ -1,18 +1,22 @@
 {% extends "star_ratings/widget_base.html" %}
 {% load i18n %}
+{% load socialaccount %}
 {% block rating_detail %}
     {% block rating_average %}
-    <div class="star-ratings-rating-average">{% trans 'Rating: ' %} <span class='star-ratings-rating-value'>{{ rating.average|floatformat:"-2" }}/5</span></div>
+        <div class="star-ratings-rating-average">{% trans 'Rating: ' %} <span
+                class='star-ratings-rating-value'>{{ rating.average|floatformat:"-2" }}/5</span></div>
     {% endblock rating_average %}
-{#    {% block rating_count %}#}
-{#    <div class="star-ratings-rating-count">{% trans 'Rating Count: ' %} <span class='star-ratings-rating-value'>{{ rating.count }}</span></div>#}
-{#    {% endblock rating_count %}#}
+    {#    {% block rating_count %}#}
+    {#    <div class="star-ratings-rating-count">{% trans 'Rating Count: ' %} <span class='star-ratings-rating-value'>{{ rating.count }}</span></div>#}
+    {#    {% endblock rating_count %}#}
     {% block rating_user %}
-    {% if not user.is_authenticated and not anonymous_ratings and not read_only %}
-        <p>{% trans 'Please log in to rate.' %}</p>
-    {% else %}
-        <div class="star-ratings-rating-user">{% trans 'You Rated: ' %} <span class='star-ratings-rating-value'>{% if user_rating %}{{ user_rating.score }}{% else %}{% trans 'Not rated' %}{% endif %}</span></div>
-    {% endif %}
+        {% if not user.is_authenticated and not anonymous_ratings and not read_only %}
+            <p>{% trans 'Sign in to rate.' %}</p>
+        {% else %}
+            <div class="star-ratings-rating-user">{% trans 'You Rated: ' %} <span
+                    class='star-ratings-rating-value'>{% if user_rating %}{{ user_rating.score }}{% else %}
+                {% trans 'Not rated' %}{% endif %}</span></div>
+        {% endif %}
     {% endblock rating_user %}
     <div class="star-ratings-errors"></div>
 {% endblock %}
