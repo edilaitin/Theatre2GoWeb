@@ -1,5 +1,6 @@
 {% load static %}
 {% load socialaccount %}
+{% load friendshiptags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -121,6 +122,7 @@
                     <ul class="navbar-nav">
                         <!-- Avatar -->
                         <li class="nav-item dropstart">
+
                             <a
                                     class="nav-link dropdown-toggle d-flex align-items-center"
                                     href="#"
@@ -135,17 +137,27 @@
                                         height="22"
                                         alt=""
                                         loading="lazy"
+
                                 />
                             </a>
+
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item" href="{% url 'my_profile' %}">My profile</a></li>
-                                <li><a class="dropdown-item" href="{% url 'friend_requests' %}">Friend requests</a></li>
+                                <li><a class="dropdown-item" href="{% url 'friend_requests' %}">Friend requests
+                                    {% if user.is_authenticated %}
+                                        {#                                        no of requests#}
+                                        <span class="badge bg-danger ms-2">8</span>
+                                    {% endif %}
+                                </a></li>
                                 <li>
                                     <hr class="dropdown-divider"/>
                                 </li>
                                 <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
                             </ul>
                         </li>
+                        {#                        {% if user.is_authenticated%}#}
+                        {#                            <span class="badge rounded-pill badge-notification bg-danger">1</span>#}
+                        {#                        {% endif %}#}
                     </ul>
                 {% else %}
                     <button

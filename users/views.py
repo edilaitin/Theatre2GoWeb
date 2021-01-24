@@ -55,3 +55,8 @@ def reject_friend(request):
     FriendshipRequest.objects.get(pk=req_id).reject()
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def display_count_requests(request):
+    count = Friend.objects.unrejected_request_count(user=request.user)
+    return {'count': count}

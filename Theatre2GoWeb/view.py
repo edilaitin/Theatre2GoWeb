@@ -10,8 +10,13 @@ from theatres.models import Theatre
 
 def home(request):
     if request.user.is_authenticated:
-        user_follow = UserFollow.objects.get(user=request.user)
-        plays = Play.objects.filter(startTime__gt=datetime.date.today() - datetime.timedelta(days=1)).order_by("startTime")
+        try:
+            user_follow = UserFollow.objects.get(user=request.user)
+        except UserFollow.DoesNotExist:
+            UserFollow.objects.create(user=request.user)
+            user_follow = UserFollow.objects.get(user=request.user)
+        plays = Play.objects.filter(startTime__gt=datetime.date.today() - datetime.timedelta(days=1)).order_by(
+            "startTime")
 
         relevant_plays = []
         for play in plays:
@@ -30,7 +35,8 @@ def home(request):
         return render(request, 'plays/play_list.html', context)
     else:
         context = {
-            "plays": Play.objects.filter(startTime__gt=datetime.date.today() - datetime.timedelta(days=1)).order_by("startTime")
+            "plays": Play.objects.filter(startTime__gt=datetime.date.today() - datetime.timedelta(days=1)).order_by(
+                "startTime")
         }
         return render(request, 'plays/play_list.html', context)
 
