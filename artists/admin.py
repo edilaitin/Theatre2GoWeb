@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from artists.models import Artist, ActorRole
+from artists.models import Artist, ActorRole, UserFollow
 from plays.admin import ActorsInline
 
 
@@ -14,3 +14,5 @@ class ArtistAdmin(admin.ModelAdmin):
 
 admin.site.register(Artist, ArtistAdmin)
 admin.site.register(ActorRole)
+admin.site.register(UserFollow)
+

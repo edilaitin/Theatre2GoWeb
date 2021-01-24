@@ -21,7 +21,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from Theatre2GoWeb import view
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name="login/index.html"), name='index'),
+    path('', view.home, name='index'),
     path('artists/', include('artists.urls')),
     path('plays/', include('plays.urls')),
     path('theatres/', include('theatres.urls')),
