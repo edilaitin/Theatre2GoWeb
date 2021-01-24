@@ -1,31 +1,43 @@
 {% extends "base.html" %}
 {% load ratings %}
 {% load cloudinary %}
+{% load socialaccount %}
 {% block title %}Plays{% endblock %}
 {% block content %}
     <div>
         <form class="input-group rounded mb-3" action="{% url 'plays_view' %}" method="get">
-             <input name="q" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-             <span class="input-group-text border-0" id="search-addon">
+            <input name="q" type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                   aria-describedby="search-addon"/>
+            <span class="input-group-text border-0" id="search-addon">
                 <i class="fas fa-search"></i>
              </span>
         </form>
+        {% if user.is_authenticated and request.path == "/" and not query %}
+            <p class="h1">Recommended for you:</p>
+        {% endif %}
         {% if query %} Search results for: {{ query }} {% endif %}
         {% for play in plays %}
             <div class="row justify-content-between">
                 <div class="col-9">
                     <div class="row">
                         <div class="col-auto">
-                            <h1><a class="link-dark"
+                            <h2><a class="link-dark"
                                    href="{% url 'play_view' play.id %}"><u>{{ play.vaultPlay.title }}</u></a>
-                            </h1>
+                            </h2>
+                            <h4>by {{ play.vaultPlay.writer }}</h4>
                             {% ratings play.vaultPlay read_only=False icon_height=20 icon_width=20 %}
-                            <h4>by {{play.vaultPlay.writer}}</h4>
                         </div>
                     </div>
-                    <p><i class="fas fa-map-marker-alt"></i> {{ play.vaultPlay.theatre.name }}</p>
-                    <p><i class="far fa-calendar-alt"></i> {{ play.startTime.date }}, {{ play.startTime|date:"l" }}</p>
-                    <p><i class="far fa-clock"></i> {{ play.startTime.time }}-{{ play.endTime.time }}</p>
+                    <div class="row">
+                        <div class="col-auto">
+                            <p class="note note-light">
+                                <i class="fas fa-map-marker-alt"></i> {{ play.vaultPlay.theatre.name }}
+                                <br>
+                                <i class="far fa-calendar-alt"></i> {{ play.startTime.date }}, {{ play.startTime|date:"l" }}
+                                <br>
+                                <i class="far fa-clock"></i> {{ play.startTime.time }}-{{ play.endTime.time }}
+                            </p></div>
+                    </div>
                 </div>
                 <div class="col-3">
                     {#                TODO: width and height automatic cu parent#}
