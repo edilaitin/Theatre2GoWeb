@@ -43,7 +43,7 @@ class PlayDetailView(DetailView):
 
         if self.request.user.is_authenticated:
             try:
-                context['follows'] = UserFollow.objects.get(user=self.request.user).plays.filter(pk=self.get_object().id).exists()
+                context['follows'] = UserFollow.objects.get(user=self.request.user).plays.filter(pk=self.get_object().vaultPlay.id).exists()
             except UserFollow.DoesNotExist:
                 context['follows'] = False
 
