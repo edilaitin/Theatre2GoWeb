@@ -15,13 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.views.generic import TemplateView
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from Theatre2GoWeb import view
 
 urlpatterns = [
     path('', view.home, name='index'),
+    # path('', view.friend_req_count, name='base'),
     path('artists/', include('artists.urls')),
     path('plays/', include('plays.urls')),
     path('theatres/', include('theatres.urls')),

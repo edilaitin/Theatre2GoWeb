@@ -5,40 +5,46 @@
 {% block content %}
     <h2>Unread friend requests:</h2>
     <div class="container">
-        <div class="row row-cols-1 row-cols-md-6 g-4">
-            {% for friend_req in friend_requests %}
-                <div class="col">
-                    <div class="card shadow-5 h-100">
-                        <img
-                                src="{{ friend_req.from_user.socialaccount_set.all.0.get_avatar_url }}"
-                                class="rounded-circle card-img-top p-1"
-                                alt=""
-                                loading="lazy"
-                        />
-                        <div class="card-body">
-                            <p class="card-text text-center">
-                                {{ friend_req.from_user.first_name }} {{ friend_req.from_user.last_name }}
-                            </p>
-                            <div class="row justify-content-evenly gap-3">
-                                <div class="col-auto">
-                                    <form action={% url 'accept_friend' %} method="POST">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="id" value="{{ friend_req.id }}">
-                                        <input type="submit" value="Accept" class="btn btn-success">
-                                    </form>
-                                </div>
-                                <div class="col-auto">
-                                    <form action={% url 'reject_friend' %} method="POST">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="id" value="{{ friend_req.id }}">
-                                        <input type="submit" value="Reject" class="btn btn-danger">
-                                    </form>
+{#        {% if f_count > 0 %}#}
+            <div class="row row-cols-1 row-cols-md-6 g-4">
+                {% for friend_req in friend_requests %}
+                    <div class="col">
+                        <div class="card shadow-5 h-100">
+                            <img
+                                    src="{{ friend_req.from_user.socialaccount_set.all.0.get_avatar_url }}"
+                                    class="rounded-circle card-img-top p-1"
+                                    alt=""
+                                    loading="lazy"
+                            />
+                            <div class="card-body">
+                                <p class="card-text text-center">
+                                    {{ friend_req.from_user.first_name }} {{ friend_req.from_user.last_name }}
+                                </p>
+                                <div class="row justify-content-evenly gap-3">
+                                    <div class="col-auto">
+                                        <form action={% url 'accept_friend' %} method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="id" value="{{ friend_req.id }}">
+                                            <input type="submit" value="Accept" class="btn btn-success">
+                                        </form>
+                                    </div>
+                                    <div class="col-auto">
+                                        <form action={% url 'reject_friend' %} method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="id" value="{{ friend_req.id }}">
+                                            <input type="submit" value="Reject" class="btn btn-danger">
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
-        </div>
+                {% endfor %}
+            </div>
+{#        {% else %}#}
+{#            <div class="container-fluid">#}
+{#                <p>You have no new friend requests</p>#}
+{#            </div>#}
+{#        {% endif %}#}
     </div>
 {% endblock %}

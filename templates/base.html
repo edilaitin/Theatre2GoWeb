@@ -144,9 +144,8 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item" href="{% url 'my_profile' %}">My profile</a></li>
                                 <li><a class="dropdown-item" href="{% url 'friend_requests' %}">Friend requests
-                                    {#                                    TODO#}
-                                    {% if user.is_authenticated %}
-                                        <span class="badge bg-danger ms-2">8</span>
+                                    {% if user.is_authenticated and f_count > 0 %}
+                                        <span class="badge bg-danger ms-2">{{ f_count }}</span>
                                     {% endif %}
                                 </a></li>
                                 <li>
@@ -155,10 +154,9 @@
                                 <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
                             </ul>
                         </li>
-                        {#                    TODO#}
-                        {#                        {% if user.is_authenticated%}#}
-                        {#                            <span class="badge rounded-pill badge-notification bg-danger">1</span>#}
-                        {#                        {% endif %}#}
+                        {% if user.is_authenticated and f_count > 0 %}
+                            <span class="badge rounded-pill badge-notification bg-danger">{{ f_count }}</span>
+                        {% endif %}
                     </ul>
                 {% else %}
                     <button
@@ -178,8 +176,11 @@
     <!-- Navbar -->
 
 </header>
+
 {#keep padding at 70px, otherwise the fixed-top navbar overlaps the site content#}
-<main style="padding-top: 70px">
+{#keep flex, display, flex-direction and min-height for footer#}
+<main style="padding-top: 70px; flex:1 0 auto;display:flex;
+  flex-direction:column; min-height:88.75vh">
     <div class="container mx-5">
         {% block content %}
         {% endblock %}
