@@ -2,46 +2,66 @@
 {% block title %}My profile{% endblock %}
 {% block content %}
     {# TODO:EDI paginate friends or show more #}
+    <div class="row">
+        <h2>Friends:</h2>
+        <div class="row row-cols-1 row-cols-md-6 g-4">
+            {% for user in friends %}
 
-    <h2>Friends:</h2>
-    {% for user in friends %}
-        {% if user.last_name %}
-            <img
-                src="{{ user.socialaccount_set.all.0.get_avatar_url }}"
-                class="rounded-circle"
-                height="90"
-                alt=""
-                loading="lazy"
-            />
-            <br>
-            <p>{{ user.first_name }}  {{ user.last_name }}</p>
-            <br>
-        {% endif %}
-    {% endfor %}
+                {% if user.last_name %}
+                    <div class="col">
+                        <div class="card shadow-5 h-100">
+                            <img
+                                    src="{{ user.socialaccount_set.all.0.get_avatar_url }}"
+                                    class="rounded-circle card-img-top p-1"
+                                    alt=""
+                                    loading="lazy"
+                            />
+                            <div class="card-body">
+                                <p class="card-text text-center">
+                                    {{ user.first_name }} {{ user.last_name }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
 
-    {# TODO:EDI paginate and/or search for user name/email #}
-    <h2>Other users:</h2>
-    {% for user in users %}
-        {% if user.last_name %}
-            <img
-                src="{{ user.socialaccount_set.all.0.get_avatar_url }}"
-                class="rounded-circle"
-                height="90"
-                alt=""
-                loading="lazy"
-            />
-            <br>
-            <p>{{ user.first_name }}  {{ user.last_name }}</p>
-            {% if not user.sent_request %}
-                <form action={% url 'add_friend' %} method="POST">
-                  {% csrf_token %}
-                  <input type="hidden" name="user_id" value="{{ user.id }}">
-                  <input type="submit" value="Add friend" class="btn btn-primary">
-                </form>
-            {% else %}
-                <p>Friend request sent</p>
-            {% endif %}
-            <br>
-        {% endif %}
-    {% endfor %}
+        <div class="row">
+            {# TODO:EDI paginate and/or search for user name/email #}
+            <h2>Other users:</h2>
+            <div class="row row-cols-1 row-cols-md-6 g-4">
+                {% for user in users %}
+                    {% if user.last_name %}
+                        <div class="col">
+                            <div class="card shadow-5 h-100">
+                                <img
+                                        src="{{ user.socialaccount_set.all.0.get_avatar_url }}"
+                                        class="rounded-circle card-img-top p-1"
+                                        alt=""
+                                        loading="lazy"
+                                />
+                                <div class="card-body">
+                                    <p class="card-text text-center">
+                                        {{ user.first_name }} {{ user.last_name }}
+                                    </p>
+                                    {#  TODO daca un other user ti-a dat friend req, tu tot poti sa ii dai add friend#}
+                                    {% if not user.sent_request %}
+                                        <form action={% url 'add_friend' %} method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="user_id" value="{{ user.id }}">
+                                            <input type="submit" value="Add friend" class="btn btn-primary">
+                                        </form>
+                                    {% else %}
+                                        <small class="text-muted">Friend request sent</small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}
+

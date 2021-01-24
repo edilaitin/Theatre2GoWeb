@@ -144,8 +144,8 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item" href="{% url 'my_profile' %}">My profile</a></li>
                                 <li><a class="dropdown-item" href="{% url 'friend_requests' %}">Friend requests
+                                    {#                                    TODO#}
                                     {% if user.is_authenticated %}
-                                        {#                                        no of requests#}
                                         <span class="badge bg-danger ms-2">8</span>
                                     {% endif %}
                                 </a></li>
@@ -155,6 +155,7 @@
                                 <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
                             </ul>
                         </li>
+                        {#                    TODO#}
                         {#                        {% if user.is_authenticated%}#}
                         {#                            <span class="badge rounded-pill badge-notification bg-danger">1</span>#}
                         {#                        {% endif %}#}

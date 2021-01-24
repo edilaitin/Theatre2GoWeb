@@ -59,4 +59,4 @@ def reject_friend(request):
 
 def display_count_requests(request):
     count = Friend.objects.unrejected_request_count(user=request.user)
-    return {'count': count}
+    return render("base.html", {'count': count})

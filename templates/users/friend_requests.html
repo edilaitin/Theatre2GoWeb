@@ -8,7 +8,7 @@
         <div class="row row-cols-1 row-cols-md-6 g-4">
             {% for friend_req in friend_requests %}
                 <div class="col">
-                    <div class="card">
+                    <div class="card shadow-5 h-100">
                         <img
                                 src="{{ friend_req.from_user.socialaccount_set.all.0.get_avatar_url }}"
                                 class="rounded-circle card-img-top p-1"
