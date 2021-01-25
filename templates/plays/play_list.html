@@ -4,7 +4,7 @@
 {% load socialaccount %}
 {% block title %}
     {% if from_home %}
-       Theatre2Go - Home
+        Theatre2Go - Home
     {% else %}
         Plays
     {% endif %}
@@ -44,7 +44,10 @@
                     <div class="row">
                         <div class="col-auto">
                             <p class="note note-light">
-                                <i class="fas fa-map-marker-alt"></i> {{ play.vaultPlay.theatre.name }}
+                                <i class="fas fa-map-marker-alt"></i>
+                                <a class="link-dark"
+                                   href="{% url 'theatre_view' play.vaultPlay.theatre.id %}">
+                                    <u>{{ play.vaultPlay.theatre.name }}</u></a>
                                 <br>
                                 <i class="far fa-calendar-alt"></i> {{ play.startTime.date }}, {{ play.startTime|date:"l" }}
                                 <br>

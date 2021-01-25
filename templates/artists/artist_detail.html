@@ -5,9 +5,6 @@
     <div>
         <!-- Header with theatre name and follow button -->
         <div>
-            <div class="text-center">
-                <img src="{{ artist.image.url }}" class="img-fluid" alt="artist photo">
-            </div>
             <div class="container" style="background-color: rgba(0, 0, 0, 0.2)">
                 <div class="row pt-2">
                     <div class="col-auto">
@@ -22,24 +19,12 @@
 
         <!-- Artist info -->
         <div class="mx-5 mt-3">
-            <div class="row justify-content-between">
+            <div class="row justify-content-between align-items-center">
                 <div class="col-md-8">
                     <p class="lead">{{ artist.shortBio }}</p>
                 </div>
-
                 <div class="col-auto">
-                    <ul class="list-group">
-                        <li class="list-group-item list-group-item-dark">
-                            <b>Associated theatres:</b>
-                        </li>
-
-                        {% for theatre in artist.associatedTheatres.all %}
-                            <a href="{% url 'theatre_view' theatre.id %}"
-                               class="list-group-item list-group-item-action list-group-item-light"
-                            >{{ theatre.name }}</a>
-                        {% endfor %}
-
-                    </ul>
+                    {% cloudinary artist.image format="jpg" width=240 height=160 crop="fill" %}
                 </div>
             </div>
             <hr>
