@@ -12,8 +12,7 @@ from friendship.models import Friend
 
 def home(request):
     if request.user.is_authenticated:
-        # # daca pun aici, imi apar doar la pagina home notif
-        # count = Friend.objects.unrejected_request_count(user=request.user)
+        count = Friend.objects.unrejected_request_count(user=request.user)
 
         try:
             user_follow = UserFollow.objects.get(user=request.user)
@@ -35,8 +34,8 @@ def home(request):
                         relevant_plays.append(play)
                         break
         context = {
-            "plays": relevant_plays
-            # , "f_count": count
+            "plays": relevant_plays,
+            "f_count": count
         }
         return render(request, 'plays/play_list.html', context)
     else:
@@ -89,12 +88,3 @@ def unfollow(request):
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-
-# TODO cum pun asta la base
-def friend_req_count(request):
-    if request.user.is_authenticated:
-        count = Friend.objects.unrejected_request_count(user=request.user)
-        context = {
-            "f_count": count
-        }
-        return render(request, '../templates/base.html', context)

@@ -1,5 +1,6 @@
 from django.contrib.postgres.search import SearchQuery, SearchVector, SearchRank
 from django.views.generic import ListView, DetailView
+from friendship.models import Friend
 
 from artists.models import UserFollow
 from plays.models import Play
@@ -27,6 +28,10 @@ class PlayListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        if self.request.user.is_authenticated:
+            count = Friend.objects.unrejected_request_count(user=self.request.user)
+            context["f_count"] = count
+
         keywords = self.request.GET.get('q')
         if keywords:
             context['query'] = keywords
@@ -40,6 +45,10 @@ class PlayDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        if self.request.user.is_authenticated:
+            count = Friend.objects.unrejected_request_count(user=self.request.user)
+            context["f_count"] = count
 
         if self.request.user.is_authenticated:
             try:

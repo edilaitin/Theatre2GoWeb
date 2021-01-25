@@ -24,6 +24,10 @@ def my_profile(request):
         "users": users
     }
 
+    if request.user.is_authenticated:
+        count = Friend.objects.unrejected_request_count(user=request.user)
+        context["f_count"] = count
+
     return render(request, "users/myprofile.html", context)
 
 

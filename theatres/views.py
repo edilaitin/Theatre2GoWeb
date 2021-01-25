@@ -1,6 +1,7 @@
 from django.contrib.postgres.search import SearchQuery, SearchVector, SearchRank
 from django.db.models import Avg
 from django.views.generic import ListView, DetailView
+from friendship.models import Friend
 from star_ratings.models import Rating
 
 from artists.models import UserFollow
@@ -31,6 +32,11 @@ class TheatreListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        if self.request.user.is_authenticated:
+            count = Friend.objects.unrejected_request_count(user=self.request.user)
+            context["f_count"] = count
+
         theatre_type = self.request.GET.get('type', None)
         if theatre_type is not None:
             context['type'] = theatre_type
@@ -48,8 +54,12 @@ class TheatreDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        theatre = self.get_object()
 
+        if self.request.user.is_authenticated:
+            count = Friend.objects.unrejected_request_count(user=self.request.user)
+            context["f_count"] = count
+
+        theatre = self.get_object()
         if self.request.user.is_authenticated:
             try:
                 context['follows'] = UserFollow.objects.get(user=self.request.user).theatres.filter(
