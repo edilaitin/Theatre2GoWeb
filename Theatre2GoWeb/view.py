@@ -90,4 +90,3 @@ def unfollow(request):
         user_follow.artists.remove(Artist.objects.get(pk=artist_id))
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
