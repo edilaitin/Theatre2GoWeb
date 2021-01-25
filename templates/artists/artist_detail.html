@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load cloudinary %}
+{% block title %}{{ artist.name }}{% endblock %}
 {% block content %}
     <div>
         <!-- Header with theatre name and follow button -->
@@ -22,7 +23,7 @@
         <!-- Artist info -->
         <div class="mx-5 mt-3">
             <div class="row justify-content-between">
-                <div class="col-auto">
+                <div class="col-md-8">
                     <p class="lead">{{ artist.shortBio }}</p>
                 </div>
 
@@ -43,7 +44,7 @@
             </div>
             <hr>
             <div>
-                <h4>Played in:</h4>
+                <h4>Appeared in:</h4>
                 <div class="row">
                     {% for assocTheatre in artist.associatedTheatres.all %}
                         <div class="col-auto">
@@ -62,6 +63,20 @@
                                         {{ actor_role.role }}
                                     </li>
                                     <br>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% for vaultPlay in vaultPlays %}
+                                {% if vaultPlay.theatre.id == assocTheatre.id %}
+                                    {% if vaultPlay.director.name == artist.name %}
+                                        <li class="list-group-item list-group-item-dark">
+                                            {{ vaultPlay.title }}
+                                        </li>
+                                        <li class="list-group-item list-group-item-light">
+                                            Director
+                                        </li>
+                                        <br>
+                                    {% endif %}
                                 {% endif %}
                             {% endfor %}
                         </div>

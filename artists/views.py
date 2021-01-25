@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView
 from friendship.models import Friend
 
 from artists.models import Artist, UserFollow
+from plays.models import VaultPlay
 
 
 class ArtistListView(ListView):
@@ -55,6 +56,8 @@ class ArtistDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        context['vaultPlays'] = VaultPlay.objects.all()
 
         if self.request.user.is_authenticated:
             count = Friend.objects.unrejected_request_count(user=self.request.user)
