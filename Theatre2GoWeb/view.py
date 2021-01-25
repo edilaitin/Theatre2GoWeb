@@ -33,6 +33,9 @@ def home(request):
                     if actor.artist in user_follow.artists.all():
                         relevant_plays.append(play)
                         break
+
+        if not relevant_plays:
+            relevant_plays = plays
         context = {
             "plays": relevant_plays,
             "f_count": count
