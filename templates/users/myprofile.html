@@ -28,9 +28,20 @@
             </div>
 
             <div class="row">
-                {# TODO:EDI paginate and/or search for user name/email #}
                 <h2>Other users:</h2>
                 <div class="row row-cols-1 row-cols-md-6 gx-4">
+                    <form class="input-group rounded mb-3" action="{% url 'my_profile' %}" method="get">
+                         <input name="q" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                         <span class="input-group-text border-0" id="search-addon">
+                            <i class="fas fa-search"></i>
+                         </span>
+                    </form>
+                    {% if query %} Search results for: {{ query }}
+                        <form action="{% url 'my_profile' %}" method="get">
+                          <input type="hidden" name="q" value=""}>
+                          <input type="submit" value="Clear" class="btn btn-outline-dark">
+                        </form>
+                    {% endif %}
                     {% for user in users %}
                         {% if user.last_name %}
                             <div class="col">

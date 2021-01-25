@@ -15,7 +15,12 @@
         {% if user.is_authenticated and request.path == "/" and not query %}
             <p class="h1">Recommended for you:</p>
         {% endif %}
-        {% if query %} Search results for: {{ query }} {% endif %}
+        {% if query %} Search results for: {{ query }}
+            <form action="{% url 'plays_view' %}" method="get">
+                <input type="hidden" name="q" value="">
+                <input type="submit" value="Clear" class="btn btn-outline-dark">
+            </form>
+        {% endif %}
         {% for play in plays %}
             <div class="row justify-content-between">
                 <div class="col-9">

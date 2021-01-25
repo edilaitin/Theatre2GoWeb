@@ -14,13 +14,26 @@ def my_profile(request):
              and user.id != request.user.id
              ]
 
-    for user in users:
+    filtered_users = []
+    keywords = request.GET.get('q')
+    if keywords:
+        for user in users:
+            if user.first_name.__contains__(keywords) or user.last_name.__contains__(keywords):
+                filtered_users.append(user)
+            elif f"{user.first_name} {user.last_name}".__contains__(keywords):
+                filtered_users.append(user)
+            elif user.email == keywords:
+                filtered_users.append(user)
+    else:
+        filtered_users = users
+
+    for user in filtered_users:
         if any(r.to_user == user for r in sent_requests):
             user.sent_request = True
         else:
             user.sent_request = False
 
-    for user in users:
+    for user in filtered_users:
         if any(r.from_user == user for r in received_requests):
             user.received_request = True
         else:
@@ -28,8 +41,11 @@ def my_profile(request):
 
     context = {
         "friends": Friend.objects.friends(request.user),
-        "users": users
+        "users": filtered_users
     }
+
+    if keywords:
+        context["query"] = keywords
 
     if request.user.is_authenticated:
         count = Friend.objects.unrejected_request_count(user=request.user)
