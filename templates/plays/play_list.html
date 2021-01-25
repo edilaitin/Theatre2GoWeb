@@ -2,16 +2,24 @@
 {% load ratings %}
 {% load cloudinary %}
 {% load socialaccount %}
-{% block title %}Plays{% endblock %}
+{% block title %}
+    {% if from_home %}
+       Theatre2Go - Home
+    {% else %}
+        Plays
+    {% endif %}
+{% endblock %}
 {% block content %}
     <div>
-        <form class="input-group rounded mb-3" action="{% url 'plays_view' %}" method="get">
-            <input name="q" type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                   aria-describedby="search-addon"/>
-            <span class="input-group-text border-0" id="search-addon">
-                <i class="fas fa-search"></i>
-             </span>
-        </form>
+        {% if not from_home %}
+            <form class="input-group rounded mb-3" action="{% url 'plays_view' %}" method="get">
+                <input name="q" type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                       aria-describedby="search-addon"/>
+                <span class="input-group-text border-0" id="search-addon">
+                    <i class="fas fa-search"></i>
+                 </span>
+            </form>
+        {% endif %}
         {% if user.is_authenticated and request.path == "/" and not query %}
             <p class="h1">Recommended for you:</p>
         {% endif %}

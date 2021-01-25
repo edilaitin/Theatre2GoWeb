@@ -38,13 +38,15 @@ def home(request):
             relevant_plays = plays
         context = {
             "plays": relevant_plays,
-            "f_count": count
+            "f_count": count,
+            "from_home": True
         }
         return render(request, 'plays/play_list.html', context)
     else:
         context = {
             "plays": Play.objects.filter(startTime__gt=datetime.date.today() - datetime.timedelta(days=1)).order_by(
-                "startTime")
+                "startTime"),
+            "from_home": True
         }
         return render(request, 'plays/play_list.html', context)
 
