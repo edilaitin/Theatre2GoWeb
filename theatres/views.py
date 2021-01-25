@@ -73,8 +73,11 @@ class TheatreDetailView(DetailView):
             vault_play_ids.append(vault_play.id)
 
         print(vault_play_ids)
-        context['general_rating'] = round(Rating.objects
-                                        .filter(object_id__in=vault_play_ids)
-                                        .aggregate(Avg('average'))['average__avg'], 1)
+        try:
+            context['general_rating'] = round(Rating.objects
+                                            .filter(object_id__in=vault_play_ids)
+                                            .aggregate(Avg('average'))['average__avg'], 1)
+        except:
+            context['general_rating'] = "No play added yet"
 
         return context
