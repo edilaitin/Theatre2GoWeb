@@ -7,6 +7,7 @@ from friendship.models import Friend, FriendshipRequest
 def my_profile(request):
     all_users = User.objects.all()
     sent_requests = Friend.objects.sent_requests(user=request.user)
+    received_requests = Friend.objects.unrejected_requests(user=request.user)
 
     users = [user for user in all_users if
              not Friend.objects.are_friends(request.user, user)
@@ -18,6 +19,12 @@ def my_profile(request):
             user.sent_request = True
         else:
             user.sent_request = False
+
+    for user in users:
+        if any(r.from_user == user for r in received_requests):
+            user.received_request = True
+        else:
+            user.received_request = False
 
     context = {
         "friends": Friend.objects.friends(request.user),
